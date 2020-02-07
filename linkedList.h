@@ -1,7 +1,6 @@
 using namespace std;
 
-class typeNode;
-typedef typeNode* ptr;
+template <class Type>
 
 class typeNode
 {

@@ -1,6 +1,7 @@
 #include <iostream>
 #include "linkedList.h"
-using namespace std;
+
+template <class Type>
 
 class Stack
 {
