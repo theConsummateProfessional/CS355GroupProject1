@@ -1,16 +1,15 @@
 using namespace std;
 
 template <class Type>
-
 class typeNode
 {
 	private:
 		Type data;
-		ptr link;
+		Type* ptr;
 	public:
-		typeNode(Type theData, ptr theLink);
+		typeNode(Type theData, Type* theLink);
 		void setData(Type theData);
-		void setLink(ptr theLink);
+		void setLink(Type* theLink);
 		Type getData() const;
-		ptr getLink() const;
+		Type* getLink() const;
 };

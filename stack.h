@@ -2,16 +2,15 @@
 #include "linkedList.h"
 
 template <class Type>
-
 class Stack
 {
 	private:
-		ptr top;
+		Type* top;
 	public:
 		Stack();
 		~Stack();
 		void push(Type);
 		Type pop();
 		bool empty() const;
-		bool full const;
+		bool full() const;
 };
