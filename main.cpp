@@ -18,45 +18,45 @@ int main()
 	do
 	{
 		switch(choice)
-		case +:
+		case '+':
 			cout << "Enter a value to be added: ";
 			cin >> value;
 			stack.push(value);
 			break;
 
-		case -:
+		case '-':
 			stack.pop();
 			break;
 
-		case ?: 
+		case '?': 
 
 			break;
 
-		case P:
+		case 'P':
 
 			break;
 
-		case @:
+		case '@':
 
 			break;
 
-		case 1:
+		case '1':
 
 			break;
 
-		case 2:
+		case '2':
 
 			break;
 
-		case 3:
+		case '3':
 
 			break;
 
-		case M:
+		case 'M':
 			printMenu();
 			break;
 
-		case Q:
+		case 'Q':
 			cout << "Goodbye..." << endl;
 			break;
 
