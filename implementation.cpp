@@ -1,5 +1,4 @@
-
-#include "stack.h"
+#include "stackList.h"
 #include <iostream>
 
 template <class Type>
