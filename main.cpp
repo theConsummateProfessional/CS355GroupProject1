@@ -33,7 +33,7 @@ int main()
 
 			break;
 
-		case 'P':
+		case 'P' ||  'p':
 
 			break;
 
@@ -53,11 +53,11 @@ int main()
 
 			break;
 
-		case 'M':
+		case 'M' || 'm':
 			printMenu();
 			break;
 
-		case 'Q':
+		case 'Q' || 'q':
 			cout << "Goodbye..." << endl;
 			break;
 
@@ -66,7 +66,7 @@ int main()
 			break;
 		}
 		
-	} while(choice != 'Q');
+	} while(choice != 'Q' || choice != 'q');
 
 	return 0;
 }
