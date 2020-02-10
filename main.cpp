@@ -4,7 +4,7 @@
 using namespace std;
 
 void printMenu();
-void insert()
+void insert();
 
 int main()
 {
@@ -14,13 +14,12 @@ int main()
 
 	printMenu();
 	
-	cin >> choice;
-	cout << endl;
-	do
-	{
+	do{
+		cin >> choice;
+		cout << endl;
+
 		switch(choice){
 		case '+':
-			cout << "Enter a value to be added: ";
 			cin >> value;
 			stack.push(value);
 			break;
@@ -33,7 +32,7 @@ int main()
 
 			break;
 
-		case 'P' ||  'p':
+		case 'P':
 
 			break;
 
@@ -53,11 +52,11 @@ int main()
 
 			break;
 
-		case 'M' || 'm':
+		case 'M':
 			printMenu();
 			break;
 
-		case 'Q' || 'q':
+		case 'Q':
 			cout << "Goodbye..." << endl;
 			break;
 
