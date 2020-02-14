@@ -1,7 +1,21 @@
+/*
+	Computer Science III
+	Assignment #5
+	
+	This program will create a templated stack class that uses a dynamic linked structure
+        to represent the list. It is a group project with three members. It contains a series of 
+	implementations to produce the desired results.	
+	
+	Due: Monday, February 17th, 2020 @ 7:30 AM 
+	Programmed By: Ethan Hood, Khoi Vo, & Paul Byars
+*/
+
 #include <iostream>
 #include "stackList.h"
 
 using namespace std;
+
+// FUNCTION PROTOTYPES
 
 void printMenu();
 void insert();
@@ -90,6 +104,12 @@ int main()
 	return 0;
 }
 
+// Function: printMenu
+// Purpose: print out the menu
+// Incoming: none
+// Outgoing: none
+// Return: none
+
 void printMenu()
 {
 	cout << "+  Insert an item" << endl
@@ -103,4 +123,3 @@ void printMenu()
 		<< "M  Print this menu again" << endl
 		<< "Q  End this program" << endl << endl;
 }
-
