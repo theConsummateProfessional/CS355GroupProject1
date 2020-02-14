@@ -6,12 +6,15 @@ class typeNode
 	private:
 		Type data;
 		typeNode<Type>* ptr;
+		bool isCurrent;
 	public:
 		typeNode(Type theData, typeNode<Type>* theLink);
 		void setData(Type theData);
 		void setLink(Type* theLink);
+		void setCurrent(bool inCurrent);
 		Type getData() const;
 		typeNode<Type>* getLink() const;
+		bool getCurrent() const;
 };
 
 template <class Type>
@@ -26,6 +29,7 @@ class Stack
 		Type pop();
 		bool empty() const;
 		bool full() const;
+		void display();
 };
 
 
@@ -34,7 +38,7 @@ typeNode<Type>::typeNode(Type theData, typeNode<Type>* theLink)
 {
 	data = theData;
 	ptr = theLink;
-	//current = false;
+	isCurrent = false;
 }
 
 template <class Type>
@@ -49,13 +53,12 @@ void typeNode<Type>::setLink(Type* theLink)
 	ptr = theLink;
 }
 
-/*
 template <class Type>
-void setCurrent(bool cur)
+void typeNode<Type>::setCurrent(bool inCurrent)
 {
-	current = cur;
+	isCurrent = inCurrent;
 }
-*/
+
 
 template <class Type>
 Type typeNode<Type>::getData() const
@@ -69,13 +72,11 @@ typeNode<Type>* typeNode<Type>::getLink() const
 	return ptr;
 }
 
-/*
 template <class Type>
-bool typeNode<Type>::isCurrent() const
+bool typeNode<Type>::getCurrent() const
 {
-	return current;
+	return isCurrent;
 }
-*/
 
 template <class Type>
 Stack<Type>::Stack()
@@ -93,10 +94,14 @@ Stack<Type>::~Stack()
 template <class Type>
 void Stack<Type>::push(Type inData)
 {
+	if(top != NULL)
+		top -> setCurrent(false);
+
 	if(!full())
 	{
 		typeNode<Type>* temp = new typeNode<Type>(inData, top);
 		top = temp;
+		top -> setCurrent(true);
 	}
 }
 
@@ -111,7 +116,10 @@ Type Stack<Type>::pop()
 		typeNode<Type>* temp = top;
 		value = temp -> getData();
 		top = temp -> getLink();
-		//top->isCurrent(true);
+		
+		if(top != NULL)
+			top -> setCurrent(true);
+
 		delete temp;
 	}
 	return value;
@@ -132,3 +140,23 @@ bool Stack<Type>::full() const
 	return false;
 }
 
+template <class Type>
+void Stack<Type>::display()
+{
+	typeNode<Type>* temp = top;
+	cout << "[";
+	while(temp != NULL)
+	{
+
+		if(temp -> getCurrent() == true)
+			cout << "[" << temp -> getData() << "] ";
+		else
+			cout << temp -> getData();
+ 
+		if((temp -> getLink() != NULL) && (temp -> getCurrent() != true))
+			cout << ", ";
+		temp = temp -> getLink();
+	}
+	cout << "]";
+	cout << endl;
+}

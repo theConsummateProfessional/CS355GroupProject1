@@ -16,7 +16,6 @@ int main()
 	
 	do{
 		cin >> choice;
-		cout << endl;
 
 		switch(choice){
 		case '+':
@@ -33,7 +32,8 @@ int main()
 			break;
 
 		case 'P':
-
+		case 'p':
+			stack.display();
 			break;
 
 		case '@':
@@ -53,10 +53,12 @@ int main()
 			break;
 
 		case 'M':
+		case 'm':
 			printMenu();
 			break;
 
 		case 'Q':
+		case 'q':
 			cout << "Goodbye..." << endl;
 			break;
 
@@ -64,8 +66,8 @@ int main()
 			cout << "Incorrect input of a choice from the menu. Try again..." << endl;
 			break;
 		}
-		
-	} while(choice != 'Q' || choice != 'q');
+
+	}while(choice != 'Q' && choice != 'q');
 
 	return 0;
 }
@@ -81,11 +83,6 @@ void printMenu()
 		<< "2  Test assignment operator" << endl
 		<< "3  Test destructor" << endl
 		<< "M  Print this menu again" << endl
-		<< "Q  End this program" << endl << endl
-		<< "Make a choice from the characters above: ";
+		<< "Q  End this program" << endl << endl;
 }
 
-void insert()
-{
-
-}
