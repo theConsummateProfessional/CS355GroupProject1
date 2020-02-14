@@ -6,15 +6,12 @@ class typeNode
 	private:
 		Type data;
 		typeNode<Type>* ptr;
-//		bool isCurrent;
 	public:
 		typeNode(Type theData, typeNode<Type>* theLink);
 		void setData(Type theData);
 		void setLink(Type* theLink);
-//		void setCurrent(bool inCurrent);
 		Type getData() const;
 		typeNode<Type>* getLink() const;
-//		bool getCurrent() const;
 };
 
 template <class Type>
@@ -25,7 +22,7 @@ class Stack
 		typeNode<Type>* cursor;
 	public:
 		Stack();
-		Stack(const Stack<Type> &);
+		Stack(const Stack&);
 		~Stack();
 		void push(Type);
 		Type pop();
@@ -42,7 +39,6 @@ typeNode<Type>::typeNode(Type theData, typeNode<Type>* theLink)
 {
 	data = theData;
 	ptr = theLink;
-//	isCurrent = false;
 }
 
 template <class Type>
@@ -57,14 +53,6 @@ void typeNode<Type>::setLink(Type* theLink)
 	ptr = theLink;
 }
 
-/*
-template <class Type>
-void typeNode<Type>::setCurrent(bool inCurrent)
-{
-	isCurrent = inCurrent;
-}
-*/
-
 template <class Type>
 Type typeNode<Type>::getData() const
 {
@@ -77,31 +65,18 @@ typeNode<Type>* typeNode<Type>::getLink() const
 	return ptr;
 }
 
-/*
-template <class Type>
-bool typeNode<Type>::getCurrent() const
-{
-	return isCurrent;
-}
-*/
-
 template <class Type>
 Stack<Type>::Stack()
 {
 	top = NULL;
+	cursor = top;
 }
 
 template <class Type>
 Stack<Type>::Stack(const Stack<Type> &copy)
 {
-//	if(copy.top != NULL)
-//		top = copy.top;
-	
-	temp = copy.top;
-	while()
-	{
-		temp.push(copy.top -> getData());
-	
+	top = copy.top;
+	cursor = copy.cursor;
 }
 
 template <class Type>
@@ -114,15 +89,12 @@ Stack<Type>::~Stack()
 template <class Type>
 void Stack<Type>::push(Type inData)
 {
-//	if(top != NULL)
-//		top -> setCurrent(false);
 
 	if(!full())
 	{
 		typeNode<Type>* temp = new typeNode<Type>(inData, top);
 		top = temp;
 		cursor = temp;
-		//top -> setCurrent(true);
 	}
 }
 
@@ -137,10 +109,7 @@ Type Stack<Type>::pop()
 		typeNode<Type>* temp = top;
 		value = temp -> getData();
 		top = temp -> getLink();
-		
-//		if(top != NULL)
-//			top -> setCurrent(true);
-
+		cursor = top;
 		delete temp;
 	}
 	return value;
@@ -212,4 +181,9 @@ Type Stack<Type>::getCursor() const
 	return cursor -> getData();
 }
 
-
+template<class Type>
+void Stack<Type>::operator=(const Stack<Type>& right)
+{
+	top = right.top;
+	cursor = right.cursor;
+}

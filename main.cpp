@@ -9,16 +9,23 @@ void insert();
 int main()
 {
 	Stack<int> stack;
-	Stack<int> s;
 	char choice = ' ';
 	int value = 0;
 	int key = 0;
 	printMenu();
 
-	s.push(1);
-	s.push(2);
-	Stack<int> s1(s);
 	
+	Stack<int> s;
+	s.push(1);		
+	s.push(2);		
+	s.push(3);		
+	s.push(4);		
+	s.push(5);		
+	s.push(6);
+
+	Stack<int> s1(s);
+	Stack<int> s2;
+
 	do{
 		cin >> choice;
 
@@ -48,15 +55,19 @@ int main()
 			break;
 
 		case '1':
-			s1.display();	
+			cout << "Here is stack s1 after copy from s:" << endl;
+			s1.display();
 			break;
 
 		case '2':
-
+			cout << "Here is stack s2 after assignment:" << endl;
+			s2 = s1;
+			s2.display();
 			break;
 
 		case '3':
-
+			stack.~Stack<int>();
+			cout << "Destructor called" << endl;
 			break;
 
 		case 'M':
