@@ -9,10 +9,15 @@ void insert();
 int main()
 {
 	Stack<int> stack;
+	Stack<int> s;
 	char choice = ' ';
 	int value = 0;
-
+	int key = 0;
 	printMenu();
+
+	s.push(1);
+	s.push(2);
+	Stack<int> s1(s);
 	
 	do{
 		cin >> choice;
@@ -28,7 +33,9 @@ int main()
 			break;
 
 		case '?': 
-
+			cin >> key;
+			stack.search(key);
+			cout << key << endl;	
 			break;
 
 		case 'P':
@@ -37,11 +44,11 @@ int main()
 			break;
 
 		case '@':
-
+			cout << stack.getCursor() << endl;
 			break;
 
 		case '1':
-
+			s1.display();	
 			break;
 
 		case '2':

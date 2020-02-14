@@ -6,15 +6,15 @@ class typeNode
 	private:
 		Type data;
 		typeNode<Type>* ptr;
-		bool isCurrent;
+//		bool isCurrent;
 	public:
 		typeNode(Type theData, typeNode<Type>* theLink);
 		void setData(Type theData);
 		void setLink(Type* theLink);
-		void setCurrent(bool inCurrent);
+//		void setCurrent(bool inCurrent);
 		Type getData() const;
 		typeNode<Type>* getLink() const;
-		bool getCurrent() const;
+//		bool getCurrent() const;
 };
 
 template <class Type>
@@ -22,23 +22,27 @@ class Stack
 {
 	private:
 		typeNode<Type>* top;
+		typeNode<Type>* cursor;
 	public:
 		Stack();
+		Stack(const Stack<Type> &);
 		~Stack();
 		void push(Type);
 		Type pop();
 		bool empty() const;
 		bool full() const;
 		void display();
+		void search(Type);
+		Type getCursor() const;
+		void operator=(const Stack&);
 };
-
 
 template <class Type>
 typeNode<Type>::typeNode(Type theData, typeNode<Type>* theLink)
 {
 	data = theData;
 	ptr = theLink;
-	isCurrent = false;
+//	isCurrent = false;
 }
 
 template <class Type>
@@ -53,12 +57,13 @@ void typeNode<Type>::setLink(Type* theLink)
 	ptr = theLink;
 }
 
+/*
 template <class Type>
 void typeNode<Type>::setCurrent(bool inCurrent)
 {
 	isCurrent = inCurrent;
 }
-
+*/
 
 template <class Type>
 Type typeNode<Type>::getData() const
@@ -72,16 +77,31 @@ typeNode<Type>* typeNode<Type>::getLink() const
 	return ptr;
 }
 
+/*
 template <class Type>
 bool typeNode<Type>::getCurrent() const
 {
 	return isCurrent;
 }
+*/
 
 template <class Type>
 Stack<Type>::Stack()
 {
 	top = NULL;
+}
+
+template <class Type>
+Stack<Type>::Stack(const Stack<Type> &copy)
+{
+//	if(copy.top != NULL)
+//		top = copy.top;
+	
+	temp = copy.top;
+	while()
+	{
+		temp.push(copy.top -> getData());
+	
 }
 
 template <class Type>
@@ -94,14 +114,15 @@ Stack<Type>::~Stack()
 template <class Type>
 void Stack<Type>::push(Type inData)
 {
-	if(top != NULL)
-		top -> setCurrent(false);
+//	if(top != NULL)
+//		top -> setCurrent(false);
 
 	if(!full())
 	{
 		typeNode<Type>* temp = new typeNode<Type>(inData, top);
 		top = temp;
-		top -> setCurrent(true);
+		cursor = temp;
+		//top -> setCurrent(true);
 	}
 }
 
@@ -117,8 +138,8 @@ Type Stack<Type>::pop()
 		value = temp -> getData();
 		top = temp -> getLink();
 		
-		if(top != NULL)
-			top -> setCurrent(true);
+//		if(top != NULL)
+//			top -> setCurrent(true);
 
 		delete temp;
 	}
@@ -141,22 +162,54 @@ bool Stack<Type>::full() const
 }
 
 template <class Type>
-void Stack<Type>::display()
+void Stack<Type>::search(Type key)
 {
 	typeNode<Type>* temp = top;
+	if(empty())
+		cout << "No such stack exists..." << endl;
+	else
+	{
+		while(temp != NULL)
+		{
+			if(temp -> getData() == key)
+				cursor = temp;
+
+			temp = temp -> getLink();
+		}
+	}
+	
+}
+
+template <class Type>
+void Stack<Type>::display()
+{
+	Stack<Type> tempStack;
+	typeNode<Type>* temp = top;
+	Type data = cursor -> getData();
 	cout << "[";
 	while(temp != NULL)
 	{
-
-		if(temp -> getCurrent() == true)
-			cout << "[" << temp -> getData() << "] ";
-		else
-			cout << temp -> getData();
- 
-		if((temp -> getLink() != NULL) && (temp -> getCurrent() != true))
-			cout << ", ";
+		Type data = temp -> getData();
+		tempStack.push(data);
 		temp = temp -> getLink();
 	}
-	cout << "]";
-	cout << endl;
+
+	while(!tempStack.empty())
+	{
+		Type popped = tempStack.pop();
+		if(popped == data)
+			cout << "[" << popped << "] ";
+		else
+			cout << popped << " ";
+	}
+
+	cout << "]" << endl;
 }
+
+template <class Type>
+Type Stack<Type>::getCursor() const
+{
+	return cursor -> getData();
+}
+
+
