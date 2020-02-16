@@ -288,7 +288,7 @@ Type Stack<Type>::getCursor() const
 // Return: right
 
 template<class Type>
-void Stack<Type>::operator=(const Stack<Type>& right)
+void Stack<Type>::operator = (const Stack<Type>& right)
 {
 	top = right.top;
 	cursor = right.cursor;

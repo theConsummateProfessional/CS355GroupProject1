@@ -21,23 +21,23 @@ void printMenu();
 
 int main()
 {
-	Stack<int> stack;
+	Stack<char> stack;
 	char choice = ' ';
-	int value = 0;
-	int key = 0;
+	char value = ' ';
+	char key = ' ';
 	printMenu();
 
 	
-	Stack<int> s;
-	s.push(1);		
-	s.push(2);		
-	s.push(3);		
-	s.push(4);		
-	s.push(5);		
-	s.push(6);
+	Stack<char> s;
+	s.push('A');		
+	s.push('B');		
+	s.push('C');		
+	s.push('D');		
+	s.push('E');		
+	s.push('F');
 
-	Stack<int> s1(s);
-	Stack<int> s2;
+	Stack<char> s1(s);
+	Stack<char> s2;
 
 	do{
 		cin >> choice;
@@ -79,7 +79,7 @@ int main()
 			break;
 
 		case '3':
-			stack.~Stack<int>();
+			stack.~Stack<char>();
 			cout << "Destructor called" << endl;
 			break;
 
