@@ -46,16 +46,19 @@ int main()
 		case '+':
 			cin >> value;
 			stack.push(value);
+			stack.display();
 			break;
 
 		case '-':
 			stack.pop();
+			stack.display();
 			break;
 
 		case '?': 
 			cin >> key;
 			stack.search(key);
-			cout << key << endl;	
+			cout << key << endl;
+			stack.display();	
 			break;
 
 		case 'P':

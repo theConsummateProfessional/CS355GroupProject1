@@ -44,20 +44,21 @@ int main()
 
 		switch(choice){
 		case '+':
-			cin >> ws;
-			getline(cin, value);
+			cin >> value;
 			stack.push(value);
+			stack.display();
 			break;
 
 		case '-':
 			stack.pop();
+			stack.display();
 			break;
 
 		case '?': 
-			cin >> ws;
-			getline(cin, key);
+			cin >> key;
 			stack.search(key);
-			cout << key << endl;	
+			cout << key << endl;
+			stack.display();	
 			break;
 
 		case 'P':

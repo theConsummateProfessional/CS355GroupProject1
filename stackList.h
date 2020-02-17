@@ -31,6 +31,10 @@ class Stack
 		typeNode<Type>* top;
 		typeNode<Type>* cursor;
 	public:
+		Type getCursorData() const;
+		void setTop(typeNode<Type>*);
+		typeNode<Type>* getTop();
+		void setCursor(typeNode<Type>*);
 		Stack();
 		Stack(const Stack&);
 		~Stack();
@@ -40,9 +44,33 @@ class Stack
 		bool full() const;
 		void display();
 		void search(Type);
-		Type getCursor() const;
-		void operator=(const Stack&);
+		typeNode<Type>* getCursor() const;
+		void operator=(Stack&);
 };
+
+template <class Type>
+Type Stack<Type>::getCursorData() const
+{
+	return cursor -> getData();
+}
+
+template <class Type>
+void Stack<Type>::setTop(typeNode<Type>* inTop)
+{
+	top = inTop;
+}
+
+template<class Type>
+void Stack<Type>::setCursor(typeNode<Type>* inCursor)
+{
+	cursor = inCursor;
+}
+
+template <class Type>
+typeNode<Type>* Stack<Type>::getTop()
+{
+	return top;
+}
 
 // Function: typeNode
 // Purpose: constructor for the template class
@@ -115,7 +143,7 @@ template <class Type>
 Stack<Type>::Stack()
 {
 	top = NULL;
-	cursor = top;
+	cursor = NULL;
 }
 
 // Function: Stack
@@ -140,6 +168,8 @@ Stack<Type>::Stack(const Stack<Type> &copy)
 template <class Type>
 Stack<Type>::~Stack()
 {
+	cursor = NULL;
+	top = NULL;
 	while(!empty())
 		cout << pop() << endl;
 }
@@ -246,27 +276,48 @@ void Stack<Type>::search(Type key)
 template <class Type>
 void Stack<Type>::display()
 {
-	Stack<Type> tempStack;
-	typeNode<Type>* temp = top;
-	Type data = cursor -> getData();
-	cout << "[";
-	while(temp != NULL)
-	{
-		Type data = temp -> getData();
-		tempStack.push(data);
-		temp = temp -> getLink();
-	}
+	if(top == NULL && cursor == NULL)
+		cout << "[]" << endl;
 
-	while(!tempStack.empty())
+	else
 	{
-		Type popped = tempStack.pop();
-		if(popped == data)
-			cout << "[" << popped << "] ";
-		else
-			cout << popped << " ";
-	}
+		Stack<Type> tempStack;
+		typeNode<Type>* temp = top;
+		Type data = cursor -> getData();
+		cout << "[";
+		while(temp != NULL)
+		{
+			Type data = temp -> getData();
 
-	cout << "]" << endl;
+			typeNode<Type>* temp2 = new typeNode<Type>(data, tempStack.getTop());
+			tempStack.setTop(temp2);
+			//cout << data << endl;
+
+			if(temp == cursor)
+			{
+				//cout << "Here" << endl;
+				tempStack.setCursor(tempStack.getTop());
+				//cout << "Here 2" << endl;
+			}
+			temp = temp -> getLink();
+		}
+
+		temp = tempStack.getTop();
+		// cout << "Here3" << endl;
+
+		while(temp != NULL)
+		{
+			if(temp == tempStack.getCursor())
+			{
+				cout << "[" << temp -> getData() << "] ";
+			}
+			else
+				cout << temp -> getData() << " ";
+
+			temp = temp -> getLink();
+		}
+		cout << "]" << endl;
+	}
 }
 
 // Function: getCursor
@@ -276,9 +327,9 @@ void Stack<Type>::display()
 // Return: cursor position
 
 template <class Type>
-Type Stack<Type>::getCursor() const
+typeNode<Type>* Stack<Type>::getCursor() const
 {
-	return cursor -> getData();
+	return cursor;
 }
 
 // Function: operator =
@@ -288,7 +339,7 @@ Type Stack<Type>::getCursor() const
 // Return: right
 
 template<class Type>
-void Stack<Type>::operator = (const Stack<Type>& right)
+void Stack<Type>::operator = (Stack<Type>& right)
 {
 	top = right.top;
 	cursor = right.cursor;
